@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NeuralNet
 {
-    class Matrix
+    class Matrix : IPrintable
     {
         private double[,] data;
         private bool isTransposed = false;
@@ -84,6 +84,20 @@ namespace NeuralNet
                 }
             });
             return result;
+        }
+
+        public void Print()
+        {
+            Console.WriteLine("---------------------");
+            for(int i = 0; i < M; i++)
+            {
+                for(int j = 0; j < N; j++)
+                {
+                    Console.Write($"{data[i, j]} ");
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine("---------------------");
         }
 
 

@@ -19,6 +19,7 @@ namespace NeuralNet
                 Console.WriteLine();
             }
             Console.WriteLine();
+
             Matrix transposed = matrix.Transposed();
             for (int i = 0; i < transposed.M; i++)
             {
@@ -27,6 +28,16 @@ namespace NeuralNet
                     Console.Write($"{transposed[i, j]} ");
                 }
                 Console.WriteLine();
+            }
+            Console.WriteLine();
+            Vector vector = new Vector(2);
+            vector[0] = rand.NextDouble();
+            vector[1] = rand.NextDouble();
+
+            Vector result = matrix * vector;
+            for(int i = 0; i < result.M; i++)
+            {
+                Console.WriteLine($"{result[i]}");
             }
         }
     }
