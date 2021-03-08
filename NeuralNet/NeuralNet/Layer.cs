@@ -6,10 +6,10 @@ namespace NeuralNet
 {
     class Layer
     {
-        Matrix WeightMatrix; //Матрица входных весов
-        Vector OutputSygnals; //Выходные сигналы текущего слоя
+        public Matrix WeightMatrix; //Матрица входных весов
+        public Vector OutputSygnals; //Выходные сигналы текущего слоя
         //Функция активации
-        void SigmoidalActivate(Vector inputSygnals)
+        public void SigmoidalActivate(Vector inputSygnals)
         {
             OutputSygnals = WeightMatrix * inputSygnals;
             for (int i = 0; i < OutputSygnals.M; i++)
