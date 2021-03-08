@@ -48,7 +48,7 @@ namespace NeuralNet
 
         public static Matrix operator *(Matrix matrix, double value)
         {
-            var result = new Matrix(matrix.M, matrix.N);
+            Matrix result = new Matrix(matrix.M, matrix.N);
             result.ProcessFunctionOverData((i, j) =>
                 result[i, j] = matrix[i, j] * value);
             return result;
@@ -60,7 +60,7 @@ namespace NeuralNet
             {
                 throw new ArgumentException("matrixes can not be multiplied");
             }
-            var result = new Matrix(matrix.M, matrix2.N);
+            Matrix result = new Matrix(matrix.M, matrix2.N);
             result.ProcessFunctionOverData((i, j) => {
                 for (var k = 0; k < matrix.N; k++)
                 {
@@ -69,7 +69,23 @@ namespace NeuralNet
             });
             return result;
         }
-        
+        public static Vector operator *(Matrix matrix, Vector vector)
+        {
+            if (matrix.N != vector.M)
+            {
+                throw new ArgumentException("matrixes can not be multiplied");
+            }
+            Vector result = new Vector(matrix.M);
+            result.ProcessFunctionOverData((i) =>
+            {
+                for(int k = 0; k < vector.M; k++)
+                {
+                    result[i] += matrix[i, k] * vector[k];
+                }
+            });
+            return result;
+        }
+
 
         public Matrix(int m, int n)
         {
