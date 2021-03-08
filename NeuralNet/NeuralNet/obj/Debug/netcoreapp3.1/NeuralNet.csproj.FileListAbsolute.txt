@@ -1,0 +1,13 @@
+D:\GitRepos\NeuralNet\NeuralNet\bin\Debug\netcoreapp3.1\NeuralNet.exe
+D:\GitRepos\NeuralNet\NeuralNet\bin\Debug\netcoreapp3.1\NeuralNet.deps.json
+D:\GitRepos\NeuralNet\NeuralNet\bin\Debug\netcoreapp3.1\NeuralNet.runtimeconfig.json
+D:\GitRepos\NeuralNet\NeuralNet\bin\Debug\netcoreapp3.1\NeuralNet.runtimeconfig.dev.json
+D:\GitRepos\NeuralNet\NeuralNet\bin\Debug\netcoreapp3.1\NeuralNet.dll
+D:\GitRepos\NeuralNet\NeuralNet\bin\Debug\netcoreapp3.1\NeuralNet.pdb
+D:\GitRepos\NeuralNet\NeuralNet\obj\Debug\netcoreapp3.1\NeuralNet.csprojAssemblyReference.cache
+D:\GitRepos\NeuralNet\NeuralNet\obj\Debug\netcoreapp3.1\NeuralNet.AssemblyInfoInputs.cache
+D:\GitRepos\NeuralNet\NeuralNet\obj\Debug\netcoreapp3.1\NeuralNet.AssemblyInfo.cs
+D:\GitRepos\NeuralNet\NeuralNet\obj\Debug\netcoreapp3.1\NeuralNet.csproj.CoreCompileInputs.cache
+D:\GitRepos\NeuralNet\NeuralNet\obj\Debug\netcoreapp3.1\NeuralNet.dll
+D:\GitRepos\NeuralNet\NeuralNet\obj\Debug\netcoreapp3.1\NeuralNet.pdb
+D:\GitRepos\NeuralNet\NeuralNet\obj\Debug\netcoreapp3.1\NeuralNet.genruntimeconfig.cache
