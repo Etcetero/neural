@@ -31,7 +31,19 @@ namespace NeuralNet
         }
 
 
-        
+        public static Vector operator *(Vector vector1, Vector vector2)
+        {
+            if (vector1.M != vector2.M)
+            {
+                throw new ArgumentException("vectors can not be multiplied");
+            }
+            Vector result = new Vector(vector1.M);
+            result.ProcessFunctionOverData((i) =>
+            {
+                result[i] = vector1[i] * vector2[i];
+            });
+            return result;
+        }
 
         public Vector(int m)
         {

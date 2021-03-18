@@ -9,30 +9,21 @@ namespace NeuralNet
         int inputCount;
         int outputCount;
         int hiddenNeuronsCount;        
-        Layer[] layerArr;
+        public Layer[] layerArr;
         //Здесь должны храниться производные
-        List<Vector> Derivatives;
+        public List<Vector> Outputs;
 
         //Один прямой проход 
         public void Step(Vector inputSygnals)
         {            
-            Derivatives.Add( layerArr[0].SigmoidalActivate(inputSygnals) );
+            Outputs.Add( layerArr[0].SigmoidalActivate(inputSygnals) );
             for (int i = 1; i < layerArr.Length; i++)
             {
-                Derivatives.Add( layerArr[i].SigmoidalActivate(layerArr[i - 1].OutputSygnals) );
+                Outputs.Add( layerArr[i].SigmoidalActivate(layerArr[i - 1].OutputSygnals) );
             }
         }
 
-        void getDerivativesSigmoidal()
-        {
-            for(int i = 0; i < Derivatives.Count; i++)
-            {
-                for(int j = 0; j< Derivatives[i].M; j++)
-                {
-                    Derivatives[i][j] = Derivatives[i][j] * (1 - Derivatives[i][j]);
-                }
-            }
-        }
+        
 
         public void Print()
         {
@@ -49,7 +40,7 @@ namespace NeuralNet
             hiddenNeuronsCount = neuronCount;
             layerArr = new Layer[++hiddenLayersCount]; //Выходной слой не является скрытым(вроде)
             layerArr[0] = new Layer(neuronCount, inCount);
-            Derivatives = new List<Vector>();
+            Outputs = new List<Vector>();
             for (int i = 1; i < hiddenLayersCount - 1; i++)
             {
                 layerArr[i] = new Layer(neuronCount, neuronCount);

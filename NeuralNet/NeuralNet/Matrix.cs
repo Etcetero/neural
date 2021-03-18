@@ -45,6 +45,15 @@ namespace NeuralNet
             return result;
 
         }
+        public Vector getColumn(int nn)
+        {
+            Vector outp = new Vector(m);
+            for(int i = 0; i < m; i++)
+            {
+                outp[i] = this[i,nn];
+            }
+            return outp;
+        }
 
         public static Matrix operator *(Matrix matrix, double value)
         {
