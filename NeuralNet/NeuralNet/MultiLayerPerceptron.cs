@@ -12,6 +12,7 @@ namespace NeuralNet
         public Layer[] layerArr;
         //Здесь должны храниться производные
         public List<Vector> Outputs;
+        Vector lastIn;
 
         //Один прямой проход 
         public void Step(Vector inputSygnals)
@@ -21,15 +22,26 @@ namespace NeuralNet
             {
                 Outputs.Add( layerArr[i].SigmoidalActivate(layerArr[i - 1].OutputSygnals) );
             }
+            lastIn = inputSygnals;
         }
 
         
 
         public void Print()
         {
+            
             foreach (var x in layerArr)
             {
                 x.WeightMatrix.Print();
+            }
+
+        }
+        public void PrintResult()
+        {
+            
+            for(int i = 0; i < this.layerArr[layerArr.Length-1].OutputSygnals.M;i++)
+            {
+                Console.Write("::" + this.layerArr[layerArr.Length - 1].OutputSygnals[i]);
             }
         }
 

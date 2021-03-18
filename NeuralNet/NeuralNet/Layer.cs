@@ -28,7 +28,7 @@ namespace NeuralNet
             {
                 for (int k = 0; k < WeightMatrix.N; k++)
                 {
-                    WeightMatrix[i, k] = random.NextDouble();
+                    WeightMatrix[i, k] = random.NextDouble() * 2 - 1;
                 }
             }
         }

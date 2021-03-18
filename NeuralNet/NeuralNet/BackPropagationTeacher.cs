@@ -15,9 +15,10 @@ namespace NeuralNet
         List<Vector> Derivatives;
         void getDerivativesSigmoidal()
         {
-            for (int i = 0; i < Derivatives.Count; i++)
+            for (int i = 0; i < perceptron.layerArr.Length; i++)
             {
-                Derivatives.Add(perceptron.Outputs[i]);
+                Derivatives.Add(perceptron.layerArr[i].OutputSygnals);
+                //Derivatives.Add(perceptron.Outputs[i]);
                 for(int j = 0; j < Derivatives[i].M; j++)
                 {
                     Derivatives[i][j] = Derivatives[i][j] * (1 - Derivatives[i][j] );
@@ -30,7 +31,7 @@ namespace NeuralNet
             Vector outPut = new Vector(Y.M);
             for(int i = 0; i < Y.M; i++)
             {
-                outPut[i] = Y[i] - perceptron.Outputs[perceptron.Outputs.Count][i];
+                outPut[i] = Y[i] - perceptron.Outputs[perceptron.Outputs.Count-1][i];
             }
             return outPut;
 
@@ -38,14 +39,15 @@ namespace NeuralNet
 
         List<Vector> GetLocalGradients(Vector err)
         {
+            
             Vector last = new Vector(err.M);
             //Вычисление локаьных градиентов последнего слоя
-            last = err * Derivatives[Derivatives.Count - 1];
+            last = err *                 Derivatives[Derivatives.Count - 1];
 
             List<Vector> localGradients = new List<Vector>();
             localGradients.Add(last);
 
-            for(int i = Derivatives.Count - 2; i > 0; i--)
+            for(int i = Derivatives.Count - 2; i >= 0; i--)
             {
                 Vector temp = new Vector(Derivatives[i].M);
                 for(int j = 0; j < temp.M; j++)
@@ -70,28 +72,47 @@ namespace NeuralNet
         }
 
 
-        public void Teach(Dictionary<Vector, Vector> teachDictionary)
+        public void Teach(Dictionary<Vector, Vector> teachDictionary, double learningRate, double momentParameter, int CountOfEpochs)
         {
-            //сначала находим ошибки
             
-            foreach(var VectorPair in teachDictionary)
+            for (int c = 0; c < CountOfEpochs; c++)
             {
-                //прямой проход
-                perceptron.Step(VectorPair.Key);
-                //Вычисляем ошибку сети для одной пары X:Y
-                Vector errors = getErrors(VectorPair.Value);
-
-
-
                 
+
+                foreach (var VectorPair in teachDictionary)
+                {
+                    //прямой проход
+                    perceptron.Step(VectorPair.Key);
+                    //Вычисляем ошибку сети для одной пары X:Y
+                    Vector errors = getErrors(VectorPair.Value);
+
+                    List<Vector> LocalGradients = GetLocalGradients(errors);
+                    LocalGradients.Reverse();
+
+                    for (int k = 0; k < perceptron.layerArr.Length; k++)
+                    {
+                        for (int i = 0; i < perceptron.layerArr[k].WeightMatrix.M; i++)
+                        {
+                            for (int j = 0; j < perceptron.layerArr[k].WeightMatrix.N; j++)
+                            {
+                                perceptron.layerArr[k].WeightMatrix[i, j] = perceptron.layerArr[k].WeightMatrix[i, j] +
+                                    LocalGradients[k][i] * perceptron.Outputs[k][i] * learningRate;
+                                //perceptron.layerArr[k].WeightMatrix[i, j] + LocalGradients[k][j] * perceptron.Outputs[k][j] * learningRate;
+                            }
+                        }
+                    }
+
+                }
             }
 
         }
 
 
-        public BackPropagationTeacher()
+        public BackPropagationTeacher(MultiLayerPerceptron perc)
         {
-            Derivatives = new List<Vector>();
+            Derivatives = new List<Vector>();            
+            perceptron = perc;
+            getDerivativesSigmoidal();
         }
     }
 }
