@@ -9,13 +9,14 @@ namespace NeuralNet
         public Matrix WeightMatrix; //Матрица входных весов
         public Vector OutputSygnals; //Выходные сигналы текущего слоя
         //Функция активации
-        public void SigmoidalActivate(Vector inputSygnals)
+        public Vector SigmoidalActivate(Vector inputSygnals)
         {
             OutputSygnals = WeightMatrix * inputSygnals;
             for (int i = 0; i < OutputSygnals.M; i++)
             {
                 OutputSygnals[i] = 1 / (1 + Math.Exp(-OutputSygnals[i]));
             }
+            return OutputSygnals;
         }
 
 
